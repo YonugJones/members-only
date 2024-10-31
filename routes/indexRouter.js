@@ -22,9 +22,25 @@ indexRouter.get('/log-out', (req, res, next) => {
   })
 })
 indexRouter.get('/sign-up', (req, res) => res.render('sign-up-form'));
-indexRouter.post('/sign-up', (req, res) => {
-  userController.addUser(req, res);
+// indexRouter.post('/sign-up', (req, res) => {
+//   userController.addUser(req, res);
+// });
+  
+indexRouter.post('/sign-up', (req, res, next) => {
+  bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
+    if (err) {
+      return next(err);
+    }
+    try {
+      await pool.query('INSERT INTO users (username, password) VALUES ($1, $2)', [
+        req.body.username,
+        hashedPassword 
+      ]);
+      res.redirect('/');
+    } catch (err) {
+      return next(err);
+    }
+  });
 });
-
 
 module.exports = indexRouter;
