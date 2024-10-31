@@ -4,7 +4,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const path = require("node:path");
 const indexRouter = require('./routes/indexRouter');
-const pool = require('./pool');
+const pool = require('./db/pool');
 require('dotenv').config(); 
 
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(
+passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       const { rows } = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
@@ -34,7 +34,7 @@ app.use(
       return done(err);
     }
   })
-)
+);
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
