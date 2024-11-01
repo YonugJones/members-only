@@ -1,9 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
+const path = require('node:path');
 const passport = require('./middleware/passport');
-const path = require("node:path");
 const indexRouter = require('./routes/indexRouter');
-require('dotenv').config(); 
 
 const app = express();
 
