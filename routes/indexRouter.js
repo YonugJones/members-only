@@ -36,7 +36,13 @@ indexRouter.post(
   [
     body('firstName').trim().isAlpha().escape().withMessage('First name should only contain letters'),
     body('lastName').trim().isAlpha().escape().withMessage('Last name should only contain letters'),
-    body('username').trim().isLength({ min: 2 }).escape().withMessage('Username must be at least 2 characters.'),
+    body('username').trim().isLength({ min: 2 }).escape().withMessage('Username must be at least 2 characters.')
+      .custom(async (username) => {
+        const isTaken = await userController.isUsernameTaken(username);
+        if (isTaken) {
+          throw new Error('Username already taken')
+        }
+      }),
     body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters.'),
     body('confirmPassword').custom((value, { req }) => {
       if (value !== req.body.password) {

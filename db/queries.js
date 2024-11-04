@@ -9,6 +9,12 @@ async function addUserQuery(firstName, lastName, username, password) {
   console.log('user insterted succesfully');
 }
 
+async function getUserByUsernameQuery(username) {
+  const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+  return result.rows[0];
+}
+
 module.exports = {
-  addUserQuery
+  addUserQuery,
+  getUserByUsernameQuery
 }

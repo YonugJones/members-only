@@ -5,6 +5,12 @@ async function addUser(userData) {
   await db.addUserQuery(firstName, lastName, username, password)
 }
 
+async function isUsernameTaken(username) {
+  const user = await db.getUserByUsernameQuery(username);
+  return !!user;
+}
+
 module.exports = {
-  addUser
+  addUser,
+  isUsernameTaken
 };
