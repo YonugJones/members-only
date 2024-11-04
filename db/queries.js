@@ -14,7 +14,12 @@ async function getUserByUsernameQuery(username) {
   return result.rows[0];
 }
 
+async function updateMembershipStatusQuery(userId, status) {
+  await pool.query('UPDATE users SET membershipStatus = $1 WHERE id = $2', [status, userId])
+}
+
 module.exports = {
   addUserQuery,
-  getUserByUsernameQuery
+  getUserByUsernameQuery,
+  updateMembershipStatusQuery
 }
