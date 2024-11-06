@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Members Only</title>
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -13,6 +12,9 @@
   <main>
     <% if (locals.user) { %>
       <h1>WELCOME BACK <%= user.username %></h1>
+      <% if (!locals.user.membershipStatus) { %>
+        <button><a href="/membership-code">Enter membership code</a></button>
+      <% } %>
       <a href="/log-out">LOG OUT</a>
     <% } else { %>
       <button><a href="/sign-up">Sign Up</a></button>

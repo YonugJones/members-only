@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Enter membership code</h1>
+  <% if (errorMessage) { %>
+    <p><%= errorMessage %></p>
+  <% } %>
+  <form action="/membership-code" method="POST">
+    <label for="passcode">Passcode</label>
+    <input type="text" id="passcode" name="passcode" required>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>

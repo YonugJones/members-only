@@ -4,12 +4,19 @@ const indexRouter = Router();
 const userController = require('../controllers/userController');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
+const db = require('../db/queries')
 
 // GET routes
 indexRouter.get('/', (req, res) => res.render('index', { user: req.user }));
 indexRouter.get('/log-in', (req, res) => res.render('log-in-form'));
 indexRouter.get('/sign-up', (req, res) => {
   res.render('sign-up-form', { userData: {}, errors: [] })
+});
+indexRouter.get('/membership-code', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/log-in');
+  }
+  res.render('membership-code', { errorMessage: '' })
 });
 
 // POST log-in
@@ -19,6 +26,29 @@ indexRouter.post('/log-in',
     failureRedirect: '/'
   })
 );
+
+// POST membership-code form
+indexRouter.post('/membership-code', async (req, res) => {
+  const { passcode } = req.body;
+  const userId = req.user.id;
+
+  const correctPasscode = process.env.MEMBERSHIP_PASSCODE;
+
+  if (passcode === correctPasscode) {
+    try {
+      await db.updateMembershipStatusQuery(userId, true);
+      const updatedUser = await db.getUserByUsernameQuery(userId);
+      req.user = updatedUser;
+      res.redirect('/');
+    } catch (err) {
+      console.error('Error updating membership status', err);
+      res.render('membership-code', { errorMessage: 'An error occured. Please try again.' });
+    }
+  } else {
+    res.render('membership-code', { errorMessage: 'Invalid passcode. Please try again.' });
+  }
+})
+
 
 // log-out route
 indexRouter.get('/log-out', (req, res, next) => {
