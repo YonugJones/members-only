@@ -16,8 +16,15 @@ async function updateMembershipStatusQuery(userId, status) {
   await pool.query('UPDATE users SET membershipStatus = $1 WHERE id = $2', [status, userId])
 }
 
+async function createMessageQuery(userId, message, date) {
+  await pool.query('INSERT INTO messages (userId, message, date) VALUES ($1, $2, $3)', 
+    [userId, message, date]
+  )
+}
+
 module.exports = {
   addUserQuery,
   getUserByUsernameQuery,
-  updateMembershipStatusQuery
+  updateMembershipStatusQuery,
+  createMessageQuery
 }

@@ -8,6 +8,9 @@ const indexRouter = Router();
 // GET routes
 indexRouter.get('/', (req, res) => res.render('index', { user: req.user }));
 indexRouter.get('/log-in', (req, res) => res.render('log-in-form'));
+indexRouter.get('/log-out', (req, res) => {
+  req.logout(() => res.redirect('/'));
+})
 indexRouter.get('/sign-up', (req, res) => res.render('sign-up-form', { errors: [], userData: {} }));
 indexRouter.get('/membership-code', (req, res) => {
   if (!req.isAuthenticated()) {
@@ -15,6 +18,12 @@ indexRouter.get('/membership-code', (req, res) => {
   }
   res.render('membership-code', { errorMessage: '' });
 });
+indexRouter.get('/new-message', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/log-in');
+  }
+  res.render('new-message-form')
+})
 
 // POST routes
 indexRouter.post('/log-in', 
@@ -23,7 +32,7 @@ indexRouter.post('/log-in',
     failureRedirect: '/log-in'
   })
 );
-
+indexRouter.post('/new-message', userController.createMessage);
 indexRouter.post('/sign-up', [
     body('firstName').isAlpha().withMessage('First name should only contain letters.'),
     body('lastName').isAlpha().withMessage('Last name should only contain letters.'),
@@ -43,11 +52,6 @@ indexRouter.post('/sign-up', [
     next();
   }, userController.addUser
 )
-
 indexRouter.post('/membership-code', userController.checkMembership);
-
-indexRouter.get('/log-out', (req, res) => {
-  req.logout(() => res.redirect('/'));
-})
 
 module.exports = indexRouter;

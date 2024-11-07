@@ -31,7 +31,22 @@ async function checkMembership(req, res) {
   }
 }
 
+async function createMessage(req, res) {
+  const { message } = req.body;
+  const userId = req.user.id;
+  const date = new Date();
+
+  try {
+    await db.createMessageQuery(userId, message, date);
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error adding message', err)
+    res.status(500).send('Internal server error')
+  }
+}
+
 module.exports = {
   addUser,
-  checkMembership
+  checkMembership,
+  createMessage
 };

@@ -12,6 +12,7 @@
   <main>
     <% if (locals.user) { %>
       <h1>WELCOME BACK <%= locals.user.username %></h1>
+      <button><a href="/new-message">Create a new message</a></button>
       <% if (locals.user.membershipStatus) { %>
         <button><a href="/membership-code">Enter membership code</a></button>
       <% } %>
