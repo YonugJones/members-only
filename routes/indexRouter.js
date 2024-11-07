@@ -8,7 +8,7 @@ const indexRouter = Router();
 // GET routes
 indexRouter.get('/', (req, res) => res.render('index', { user: req.user }));
 indexRouter.get('/log-in', (req, res) => res.render('log-in-form'));
-indexRouter.get('/sign-up', (req, res) => res.render('sign-up-form', { errors: [] }));
+indexRouter.get('/sign-up', (req, res) => res.render('sign-up-form', { errors: [], userData: {} }));
 indexRouter.get('/membership-code', (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/log-in');

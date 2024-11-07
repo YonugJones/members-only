@@ -10,9 +10,9 @@
     <h1>Members Only</h1>
   </header>
   <main>
-    <% if (currentUser) { %>
-      <h1>WELCOME BACK <%= currentUser.username %></h1>
-      <% if (!currentUser.membershipStatus) { %>
+    <% if (locals.user) { %>
+      <h1>WELCOME BACK <%= locals.user.username %></h1>
+      <% if (locals.user.membershipStatus) { %>
         <button><a href="/membership-code">Enter membership code</a></button>
       <% } %>
       <a href="/log-out">LOG OUT</a>
