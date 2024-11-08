@@ -13,10 +13,23 @@
     <% if (locals.user) { %>
       <h1>WELCOME BACK <%= locals.user.username %></h1>
       <button><a href="/new-message">Create a new message</a></button>
-      <% if (locals.user.membershipStatus) { %>
+      <% if (!locals.user.membershipstatus) { %>
         <button><a href="/membership-code">Enter membership code</a></button>
       <% } %>
       <a href="/log-out">LOG OUT</a>
+    
+      <h2>Messages</h2>
+      <% messages.forEach((message) => { %>
+        <div class="message">
+          <p><%= message.message %></p>
+          <% console.log(message.username) %>
+          <% console.log(locals.user.membershipstatus) %>
+          <% if (locals.user.membershipstatus) { %>
+            <p><%= message.username %></p>
+            <p><%= message.date.toLocaleDateString("en-US") %></p>
+          <% } %>
+        </div>
+      <% }) %>
     <% } else { %>
       <button><a href="/sign-up">Sign Up</a></button>
       <button><a href="/log-in">Log In</a></button>

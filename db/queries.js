@@ -22,9 +22,17 @@ async function createMessageQuery(userId, message, date) {
   )
 }
 
+async function getAllMessagesQuery() {
+  const result = await pool.query(
+    'SELECT messages.id, messages.message, messages.date, users.username FROM messages JOIN users ON messages.userid = users.id'
+  );
+  return result.rows;
+}
+
 module.exports = {
   addUserQuery,
   getUserByUsernameQuery,
   updateMembershipStatusQuery,
-  createMessageQuery
+  createMessageQuery,
+  getAllMessagesQuery
 }

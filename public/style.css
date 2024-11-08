@@ -3,3 +3,20 @@
   font-size: 0.9em;
   margin-top: 4px;
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #000428, #1a0026, #28004d, #1f0040, #0d0d5e);
+  background-size: cover;
+  background-attachment: fixed;
+  color: #ffffff;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.message {
+  outline: 1px solid white;
+}

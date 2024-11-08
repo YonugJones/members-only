@@ -1,6 +1,16 @@
 const db = require('../db/queries');
 const bcrypt = require('bcryptjs');
 
+async function getAllMessages(req, res) {
+  try {
+    const messages = await db.getAllMessagesQuery();
+    res.render('index', { user: req.user, messages })
+  } catch (err) {
+    console.error('Error fetching messages', err);
+    res.status(500).send('Internal server error');
+  }
+}
+
 async function addUser(req, res) {
   const { firstName, lastName, username, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -46,6 +56,7 @@ async function createMessage(req, res) {
 }
 
 module.exports = {
+  getAllMessages,
   addUser,
   checkMembership,
   createMessage

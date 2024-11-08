@@ -6,7 +6,7 @@ const passport = require('passport');
 const indexRouter = Router();
 
 // GET routes
-indexRouter.get('/', (req, res) => res.render('index', { user: req.user }));
+indexRouter.get('/', userController.getAllMessages);
 indexRouter.get('/log-in', (req, res) => res.render('log-in-form'));
 indexRouter.get('/log-out', (req, res) => {
   req.logout(() => res.redirect('/'));
