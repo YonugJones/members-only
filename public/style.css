@@ -17,6 +17,7 @@ html, body {
 }
 
 body {
+  font-family: 'Roboto', sans-serif;
   background-color: #e8f3ed;
   display: flex;
   flex-direction: column;
@@ -37,6 +38,11 @@ body {
 .header {
   justify-content: space-between;
   padding: 20px 30px;
+}
+
+.header-right-bottom {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .main {
@@ -63,6 +69,8 @@ body {
   align-items: center;
   flex-direction: column;
   width: 100%;
+  position: absolute;
+  transform: translateY(50%);
 }
 
 .form-card {
