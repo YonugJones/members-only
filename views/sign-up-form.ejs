@@ -10,32 +10,32 @@
       <h2>Sign Up</h2>
       <label for="firstName">First Name:</label>
       <input type="text" id="firstName" name="firstName" value="<%= userData.firstName %>" required />
-      <% if (errors.find(e => e.param === 'firstName')) { %>
-        <div class="error"><%= errors.find(e => e.param === 'firstName').msg %></div>
+      <% if (errors.find(e => e.path === 'firstName')) { %>
+        <div class="error"><%= errors.find(e => e.path === 'firstName').msg %></div>
       <% } %>
       
       <label for="lastName">Last Name:</label>
       <input type="text" id="lastName" name="lastName" value="<%= userData.lastName %>" required />
-      <% if (errors.find(e => e.param === 'lastName')) { %>
-        <div class="error"><%= errors.find(e => e.param === 'lastName').msg %></div>
+      <% if (errors.find(e => e.path === 'lastName')) { %>
+        <div class="error"><%= errors.find(e => e.path === 'lastName').msg %></div>
       <% } %>
 
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" value="<%= userData.username %>" required />
-      <% if (errors.find(e => e.param === 'username')) { %>
-        <div class="error"><%= errors.find(e => e.param === 'username').msg %></div>
+      <% if (errors.find(e => e.path === 'username')) { %>
+        <div class="error"><%= errors.find(e => e.path === 'username').msg %></div>
       <% } %>
 
       <label for="password">Password:</label>
       <input type="password" id="password" name="password" required />
-      <% if (errors.find(e => e.param === 'password')) { %>
-        <div class="error"><%= errors.find(e => e.param === 'password').msg %></div>
+      <% if (errors.find(e => e.path === 'password')) { %>
+        <div class="error"><%= errors.find(e => e.path === 'password').msg %></div>
       <% } %>
 
       <label for="confirmPassword">Confirm Password:</label>
       <input type="password" id="confirmPassword" name="confirmPassword" required />
-      <% if (errors.find(e => e.param === 'confirmPassword')) { %>
-        <div class="error"><%= errors.find(e => e.param === 'confirmPassword').msg %></div>
+      <% if (errors.find(e => e.path === 'confirmPassword')) { %>
+        <div class="error"><%= errors.find(e => e.path === 'confirmPassword').msg %></div>
       <% } %>
 
       <button type="submit">Sign Up</button>

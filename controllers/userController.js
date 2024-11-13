@@ -1,5 +1,6 @@
 const db = require('../db/queries');
 const bcrypt = require('bcryptjs');
+const { validationResult } = require('express-validator');
 
 async function getAllMessages(req, res) {
   try {
@@ -13,9 +14,27 @@ async function getAllMessages(req, res) {
 
 async function addUser(req, res) {
   const { firstName, lastName, username, password } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
+    const existingUser = await db.getUserByUsernameQuery(username);
+    if (existingUser) {
+      const errors = validationResult(req);
+      console.log(errors);
+      errors.errors.push({
+        msg: 'Username already taken',
+        path: 'username'
+      });
+
+      console.log(errors);
+
+      return res.render('sign-up-form', { 
+        errors: errors.array(), 
+        userData: req.body 
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     await db.addUserQuery(firstName, lastName, username, hashedPassword);
     res.redirect('/');
   } catch (err) {

@@ -4,6 +4,7 @@ const session = require('express-session');
 const path = require('node:path');
 const passport = require('./middleware/passport');
 const indexRouter = require('./routes/indexRouter');
+const authRouter = require('./routes/authRouter');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/', indexRouter);
+app.use('/', authRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
