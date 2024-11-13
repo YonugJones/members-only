@@ -1,22 +1,94 @@
-.error {
-  color: red;
-  font-size: 0.9em;
-  margin-top: 4px;
+:root {
+  --background-gradient: linear-gradient(90deg, rgba(147, 184, 160) 0%, rgba(221,255,238,1) 50%, rgb(147, 184, 160) 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 body {
+  background-color: #e8f3ed;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.header, .footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  background: var(--background-gradient);
+  flex-shrink: 0; 
+  box-shadow: 0px 6px 23px 0px rgba(149,149,149,1);
+}
+
+.header {
+  justify-content: space-between;
+  padding: 20px 30px;
+}
+
+.main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(180deg, #000428, #1a0026, #28004d, #1f0040, #0d0d5e);
-  background-size: cover;
-  background-attachment: fixed;
-  color: #ffffff;
-  min-height: 100vh;
-  overflow: hidden;
+  flex-grow: 1;
+  padding: 20px;
+  width: 100%;
 }
 
 .message {
-  outline: 1px solid white;
+  border-radius: 10px;
+  background: var(--background-gradient);
+  width: 500px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: var(--background-gradient);
+  width: 500px;
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0px 6px 23px 0px rgb(149, 149, 149);
+  min-height: 300px;
+  padding: 20px;
+}
+
+.footer p {
+  font-size: 14px;
+}
+
+button a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
 }

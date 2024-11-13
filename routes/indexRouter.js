@@ -10,7 +10,7 @@ indexRouter.get('/', userController.getAllMessages);
 indexRouter.get('/log-in', (req, res) => res.render('log-in-form'));
 indexRouter.get('/log-out', (req, res) => {
   req.logout(() => res.redirect('/'));
-})
+});
 indexRouter.get('/sign-up', (req, res) => res.render('sign-up-form', { errors: [], userData: {} }));
 indexRouter.get('/membership-code', (req, res) => {
   if (!req.isAuthenticated()) {
@@ -22,8 +22,8 @@ indexRouter.get('/new-message', (req, res) => {
   if (!req.isAuthenticated()) {
     return res.redirect('/log-in');
   }
-  res.render('new-message-form')
-})
+  res.render('new-message-form');
+});
 
 // POST routes
 indexRouter.post('/log-in', 
@@ -40,18 +40,18 @@ indexRouter.post('/sign-up', [
     body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters.'),
     body('confirmPassword').custom((value, { req }) => {
       if (value !== req.body.password) {
-        throw new Error('Passwords do not match')
+        throw new Error('Passwords do not match');
       }
       return true;
     })
   ], (req, res, next) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty) {
+    if (!errors.isEmpty()) {
       return res.render('sign-up-form', { errors: errors.array() });
     }
     next();
   }, userController.addUser
-)
+);
 indexRouter.post('/membership-code', userController.checkMembership);
 
 module.exports = indexRouter;

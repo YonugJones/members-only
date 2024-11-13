@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>Membership Code</title>
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <h1>Enter membership code</h1>
-  <% if (errorMessage) { %>
-    <p><%= errorMessage %></p>
-  <% } %>
   <form action="/membership-code" method="POST">
+    <h1>Enter membership code</h1>
+    <% if (errorMessage) { %>
+      <p><%= errorMessage %></p>
+    <% } %>
     <label for="passcode">Passcode</label>
     <input type="text" id="passcode" name="passcode" required>
     <button type="submit">Submit</button>

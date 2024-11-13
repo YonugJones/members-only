@@ -1,26 +1,45 @@
-<form action="/sign-up" method="POST">
-  <h1>Sign Up</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="form-container">
+    <form class="form-card" action="/sign-up" method="POST">
+      <h2>Sign Up</h2>
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" value="<%= userData.firstName %>" required />
+      <% if (errors.find(e => e.param === 'firstName')) { %>
+        <div class="error"><%= errors.find(e => e.param === 'firstName').msg %></div>
+      <% } %>
+      
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" value="<%= userData.lastName %>" required />
+      <% if (errors.find(e => e.param === 'lastName')) { %>
+        <div class="error"><%= errors.find(e => e.param === 'lastName').msg %></div>
+      <% } %>
 
-  <label for="firstName">First Name</label>
-  <input id="firstName" name="firstName" type="text" value="<%= userData ? userData.firstName : '' %>">
-  <%- include('./partials/error-message.ejs', { errors: errors, fieldName: 'firstName' }) %>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="<%= userData.username %>" required />
+      <% if (errors.find(e => e.param === 'username')) { %>
+        <div class="error"><%= errors.find(e => e.param === 'username').msg %></div>
+      <% } %>
 
-  <label for="lastName">Last Name</label>
-  <input id="lastName" name="lastName" type="text" value="<%= userData ? userData.lastName : '' %>">
-  <%- include('./partials/error-message.ejs', { errors: errors, fieldName: 'lastName' }) %>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <% if (errors.find(e => e.param === 'password')) { %>
+        <div class="error"><%= errors.find(e => e.param === 'password').msg %></div>
+      <% } %>
 
-  <label for="username">Username</label>
-  <input id="username" name="username" type="text" value="<%= userData ? userData.username : '' %>">
-  <%- include('./partials/error-message.ejs', { errors: errors, fieldName: 'username' }) %>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" required />
+      <% if (errors.find(e => e.param === 'confirmPassword')) { %>
+        <div class="error"><%= errors.find(e => e.param === 'confirmPassword').msg %></div>
+      <% } %>
 
-  <label for="password">Password</label>
-  <input id="password" name="password" type="password" value="<%= userData ? userData.password : '' %>">
-  <%- include('./partials/error-message.ejs', { errors: errors, fieldName: 'password' }) %>
-
-  <label for="confirmPassword">Confirm Password</label>
-  <input name="confirmPassword" type="password" value="<%= userData ? userData.confirmPassword : '' %>">
-  <%- include('./partials/error-message.ejs', { errors: errors, fieldName: 'confirmPassword' }) %>
-
-  <button type="submit">Sign Up</button>
-</form>
-<button><a href="/">Back to home</a></button>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</body>
+</html>
