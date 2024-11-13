@@ -45,7 +45,7 @@ authRouter.post('/sign-up', [
 );
 
 authRouter.post('/delete-message/:id', async (req, res) => {
-  if (req.user && req.user.isAdmin) {
+  if (req.user && req.user.isadmin) {
     await userController.deleteMessage(req, res);
   } else {
     res.status(403).send('Forbidden');

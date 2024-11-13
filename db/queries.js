@@ -28,7 +28,7 @@ async function deleteMessageQuery(messageId) {
 
 async function getAllMessagesQuery() {
   const result = await pool.query(
-    'SELECT messages.id, messages.message, messages.date, users.username FROM messages JOIN users ON messages.userid = users.id'
+    'SELECT messages.id, messages.message, messages.date, users.username FROM messages JOIN users ON messages.userid = users.id ORDER BY messages.date DESC'
   );
   return result.rows;
 }
