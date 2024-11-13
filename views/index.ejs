@@ -39,7 +39,15 @@
     <% messages.forEach((message) => { %>
       <div class="message">
         <p class="message-text"><%= message.message %></p>
-        
+
+        <% if (locals.user && locals.user.isadmin) { %>
+          <div class="delete-message-button">
+            <form action="/delete-message/<%= message.id %>" method="POST">
+              <button type="submit">Delete</button>
+            </form>
+          </div>
+        <% } %>
+
         <% if (locals.user && locals.user.membershipstatus) { %>
           <div class="message-info">
             <p class="message-username"><%= message.username %></p>

@@ -13,9 +13,13 @@ async function getAllMessages(req, res) {
 }
 
 async function addUser(req, res) {
-  const { firstName, lastName, username, password } = req.body;
+  const { firstName, lastName, username, password, isAdmin } = req.body;
+  const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
+    const isAdminValue = isAdmin === 'on' ? true : false;
+
+
     const existingUser = await db.getUserByUsernameQuery(username);
     if (existingUser) {
       const errors = validationResult(req);
@@ -33,9 +37,7 @@ async function addUser(req, res) {
       });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await db.addUserQuery(firstName, lastName, username, hashedPassword);
+    await db.addUserQuery(firstName, lastName, username, hashedPassword, isAdminValue);
     res.redirect('/');
   } catch (err) {
     console.error('Error adding user', err);
@@ -74,9 +76,22 @@ async function createMessage(req, res) {
   }
 }
 
+async function deleteMessage(req, res) {
+  const { id } = req.params;
+
+  try {
+    await db.deleteMessageQuery(id);
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error deleting message', err);
+    res.status(500).send('Internal server error');
+  }
+}
+
 module.exports = {
   getAllMessages,
   addUser,
   checkMembership,
-  createMessage
+  createMessage,
+  deleteMessage
 };

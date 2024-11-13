@@ -1,9 +1,9 @@
 const pool = require('./pool');
 
-async function addUserQuery(firstName, lastName, username, password) {
+async function addUserQuery(firstName, lastName, username, password, isAdmin) {
   await pool.query(
-    'INSERT INTO users (firstName, lastName, username, password) VALUES ($1, $2, $3, $4)',
-    [firstName, lastName, username, password]
+    'INSERT INTO users (firstName, lastName, username, password, isAdmin) VALUES ($1, $2, $3, $4, $5)',
+    [firstName, lastName, username, password, isAdmin]
   );
 }
 
@@ -22,6 +22,10 @@ async function createMessageQuery(userId, message, date) {
   )
 }
 
+async function deleteMessageQuery(messageId) {
+  await pool.query('DELETE FROM messages where id = $1', [messageId])
+}
+
 async function getAllMessagesQuery() {
   const result = await pool.query(
     'SELECT messages.id, messages.message, messages.date, users.username FROM messages JOIN users ON messages.userid = users.id'
@@ -34,5 +38,6 @@ module.exports = {
   getUserByUsernameQuery,
   updateMembershipStatusQuery,
   createMessageQuery,
+  deleteMessageQuery,
   getAllMessagesQuery
 }

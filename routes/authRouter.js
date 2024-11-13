@@ -5,7 +5,6 @@ const userController = require('../controllers/userController');
 
 const authRouter = Router();
 
-// Login
 authRouter.get('/log-in', (req, res) => res.render('log-in-form'));
 authRouter.post('/log-in',
   passport.authenticate('local', {
@@ -14,12 +13,10 @@ authRouter.post('/log-in',
   })
 );
 
-// Logout
 authRouter.get('/log-out', (req, res) => {
   req.logout(() => res.redirect('/'));
 });
 
-// Sign-up form
 authRouter.get('/sign-up', (req, res) => {
   res.render('sign-up-form', { errors: [], userData: {} });
 });
@@ -46,5 +43,13 @@ authRouter.post('/sign-up', [
     next();
   }, userController.addUser
 );
+
+authRouter.post('/delete-message/:id', async (req, res) => {
+  if (req.user && req.user.isAdmin) {
+    await userController.deleteMessage(req, res);
+  } else {
+    res.status(403).send('Forbidden');
+  }
+});
 
 module.exports = authRouter;

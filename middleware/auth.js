@@ -5,4 +5,11 @@ function isAuthenticated(req, res, next) {
   res.redirect('/log-in');
 }
 
-module.exports = { isAuthenticated };
+function isAdmin(req, res, next) {
+  if (req.user && req.user.isAdmin) {
+    return next();
+  }
+  res.status(403).send('Forbidden');
+}
+
+module.exports = { isAuthenticated, isAdmin };

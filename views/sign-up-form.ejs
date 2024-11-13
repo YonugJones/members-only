@@ -38,8 +38,13 @@
         <div class="error"><%= errors.find(e => e.path === 'confirmPassword').msg %></div>
       <% } %>
 
-      <button type="submit">Sign Up</button>
-      <button><a href="/">Back to homepage</a></button>
+      <label for="isAdmin">Is Admin:</label>
+      <input type="checkbox" id="isAdmin" name="isAdmin" />
+
+      <div class="form-buttons">
+        <button type="submit">Submit</button>
+        <button><a href="/">Back to homepage</a></button>
+      </div>
     </form>
   </div>
 </body>

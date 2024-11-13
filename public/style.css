@@ -99,6 +99,22 @@ body {
   padding: 20px;
 }
 
+.delete-message-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  transform: translateY(20%)
+}
+
+.form-buttons button {
+  margin: 5px;
+}
+
 .footer p {
   font-size: 14px;
 }
