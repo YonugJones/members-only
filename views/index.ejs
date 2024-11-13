@@ -41,8 +41,10 @@
         <p class="message-text"><%= message.message %></p>
         
         <% if (locals.user && locals.user.membershipstatus) { %>
-          <p class="message-username"><%= message.username %></p>
-          <p class="message-date"><%= message.date.toLocaleDateString("en-US") %></p>
+          <div class="message-info">
+            <p class="message-username"><%= message.username %></p>
+            <p class="message-date"><%= message.date.toLocaleDateString("en-US") %></p>
+          </div>
         <% } %>
         
       </div>

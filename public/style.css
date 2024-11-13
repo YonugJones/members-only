@@ -61,6 +61,18 @@ body {
   width: 500px;
   margin: 5px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message-text {
+  font-size: 1.5rem;
+}
+
+.message-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 
 .form-container {
